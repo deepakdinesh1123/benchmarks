@@ -1,2 +1,5 @@
 flake8
 black
+beautifulsoup
+requests
+lxml
