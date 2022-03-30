@@ -1,0 +1,22 @@
+{
+  "name": "actions-test",
+  "version": "1.0.0",
+  "description": "node app for testing actions",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepakdinesh1123/actions.git"
+  },
+  "author": "Deepak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deepakdinesh1123/actions/issues"
+  },
+  "homepage": "https://github.com/deepakdinesh1123/actions#readme",
+  "dependencies": {
+    "@tensorflow/tfjs": "^3.15.0"
+  }
+}
