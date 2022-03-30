@@ -14,3 +14,4 @@ print(etree.tostring(tree, pretty_print=True))
 # pretty = soup.prettify().encode('utf-8').strip()
 # with open('pretty.xml', 'wb+') as fp:
 #    fp.write(pretty)
+print("ping")
