@@ -1,5 +1,0 @@
-flake8
-black
-beautifulsoup4
-requests
-lxml
