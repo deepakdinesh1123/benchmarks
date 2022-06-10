@@ -30,7 +30,7 @@ jobs:
       - name: Move results(windows)
         if: ${{ matrix.os=='windows-2016' || matrix.os=='windows-2019' || matrix.os=='windows-2022'}}
         run: |
-          if not exist ci-results/results/${{ matrix.os }} mkdir ci-results/results/${{ matrix.os }}
+          if(!( test-path ci-results/results/${{ matrix.os }} )) { mkdir ci-results/results/${{ matrix.os }} }
           move -y results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os }}/
           move -y results/benchmarks.json ci-results/results/
       - name: Move results(ubuntu)
