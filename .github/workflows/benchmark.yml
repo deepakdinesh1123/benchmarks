@@ -40,6 +40,8 @@ jobs:
           mv -f results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os}}/
           mv -f results/benchmarks.json ci-results/results/
       - name: Commit results
+        if: steps.auto-commit-action.outputs.changes_detected == 'true'
+        run: git pull origin
         uses: stefanzweifel/git-auto-commit-action@v4.6.0
         with:
           commit_user_name: 'Github actions bot(results)'
