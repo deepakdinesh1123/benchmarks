@@ -25,7 +25,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run Benchmarks
         run: |-
-          asv machine --machine ubuntu-latest --yes
+          asv machine --machine ${{ matrix.os }} --yes
           asv run
       - name: Move results(windows)
         if: ${{ matrix.os=="windows-2016" || matrix.os=="windows-2019" || matrix.os=="windows-2022"}}
@@ -41,4 +41,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4.6.0
         with:
           commit_user_name: 'Github actions bot(results)'
-          commit_message: 'results added [skip ci]'
+          commit_message: 'results for ${{ matrix.os }} added [skip ci]'
