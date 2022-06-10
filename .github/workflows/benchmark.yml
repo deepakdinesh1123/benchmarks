@@ -31,8 +31,8 @@ jobs:
         if: ${{ matrix.os=='windows-2016' || matrix.os=='windows-2019' || matrix.os=='windows-2022'}}
         run: |
           if(!( test-path ci-results/results/${{ matrix.os }} )) { mkdir ci-results/results/${{ matrix.os }} }
-          move -y results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os }}/
-          move -y results/benchmarks.json ci-results/results/
+          move-item -path results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os }}/ -force
+          move-item -path results/benchmarks.json ci-results/results/ -force
       - name: Move results(ubuntu)
         if: ${{ matrix.os=='ubuntu-18.04' || matrix.os=='ubuntu-20.04' || matrix.os=='ubuntu-22.04'}}
         run: |
