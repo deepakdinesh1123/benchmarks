@@ -28,12 +28,12 @@ jobs:
           asv machine --machine ${{ matrix.os }} --yes
           asv run
       - name: Move results(windows)
-        if: ${{ matrix.os=="windows-2016" || matrix.os=="windows-2019" || matrix.os=="windows-2022"}}
+        if: ${{ matrix.os==windows-2016 || matrix.os==windows-2019 || matrix.os==windows-2022}}
         run: |
           move -y results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os}}/
           move -y results/benchmarks.json ci-results/${{ matrix.os }}/
       - name: Move results(ubuntu)
-        if: ${{ matrix.os=="ubuntu-18.04" || matrix.os=="ubuntu-20.04" || matrix.os=="ubuntu-22.04"}}
+        if: ${{ matrix.os==ubuntu-18.04 || matrix.os==ubuntu-20.04 || matrix.os==ubuntu-22.04}}
         run: |
           mv -f results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os}}/
           mv -f results/benchmarks.json ci-results/${{ matrix.os }}/
