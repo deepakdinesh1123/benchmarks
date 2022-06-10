@@ -32,13 +32,13 @@ jobs:
         run: |
           if not exist ci-results/results/${{ matrix.os }} mkdir ci-results/results/${{ matrix.os }}
           move -y results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os }}/
-          move -y results/benchmarks.json ci-results/${{ matrix.os }}/
+          move -y results/benchmarks.json ci-results/results/
       - name: Move results(ubuntu)
         if: ${{ matrix.os=='ubuntu-18.04' || matrix.os=='ubuntu-20.04' || matrix.os=='ubuntu-22.04'}}
         run: |
           mkdir -p ci-results/results/${{ matrix.os}}/
           mv -f results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os}}/
-          mv -f results/benchmarks.json ci-results/${{ matrix.os }}/
+          mv -f results/benchmarks.json ci-results/results/
       - name: Commit results
         uses: stefanzweifel/git-auto-commit-action@v4.6.0
         with:
