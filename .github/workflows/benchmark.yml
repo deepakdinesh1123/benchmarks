@@ -12,7 +12,7 @@ jobs:
   run_benchmarks_ubuntu:
     strategy:
       matrix:
-        os: ['ubuntu-18.04', 'ubuntu-20.04', 'ubuntu-22.04']
+        os: ['ubuntu-18.04', 'ubuntu-20.04', 'ubuntu-22.04', 'windows-2016', 'windows-2019', 'windows-2022']
     runs-on: ${{ matrix.os }}
     steps:
       - name: checkout
@@ -30,11 +30,13 @@ jobs:
       - name: Move results(windows)
         if: ${{ matrix.os=='windows-2016' || matrix.os=='windows-2019' || matrix.os=='windows-2022'}}
         run: |
-          move -y results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os}}/
+          if not exist ci-results/results/${{ matrix.os }} mkdir ci-results/results/${{ matrix.os }}
+          move -y results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os }}/
           move -y results/benchmarks.json ci-results/${{ matrix.os }}/
       - name: Move results(ubuntu)
         if: ${{ matrix.os=='ubuntu-18.04' || matrix.os=='ubuntu-20.04' || matrix.os=='ubuntu-22.04'}}
         run: |
+          mkdir -p ci-results/results/${{ matrix.os}}/
           mv -f results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os}}/
           mv -f results/benchmarks.json ci-results/${{ matrix.os }}/
       - name: Commit results
