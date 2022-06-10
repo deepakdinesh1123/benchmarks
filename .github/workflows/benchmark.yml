@@ -5,11 +5,15 @@ on:
   push:
     branches:
       - "main"
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
-
-  run_benchmarks:
-    runs-on: ubuntu-latest
+  run_benchmarks_ubuntu:
+    strategy:
+      matrix:
+        os: ['ubuntu-18.04', 'ubuntu-20.04', 'ubuntu-22.04']
+    runs-on: ${{ matrix.os }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -21,5 +25,20 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run Benchmarks
         run: |-
-          asv machine --yes
+          asv machine --machine ubuntu-latest --yes
           asv run
+      - name: Move results(windows)
+        if: ${{ matrix.os=="windows-2016" || matrix.os=="windows-2019" || matrix.os=="windows-2022"}}
+        run: |
+          move -y results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os}}/
+          move -y results/benchmarks.json ci-results/${{ matrix.os }}/
+      - name: Move results(ubuntu)
+        if: ${{ matrix.os=="ubuntu-18.04" || matrix.os=="ubuntu-20.04" || matrix.os=="ubuntu-22.04"}}
+        run: |
+          mv -f results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os}}/
+          mv -f results/benchmarks.json ci-results/${{ matrix.os }}/
+      - name: Commit results
+        uses: stefanzweifel/git-auto-commit-action@v4.6.0
+        with:
+          commit_user_name: 'Github actions bot(results)'
+          commit_message: 'results added [skip ci]'
