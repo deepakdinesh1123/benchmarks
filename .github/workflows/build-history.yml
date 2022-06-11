@@ -1,15 +1,13 @@
-name: Benchmark
+name: Build results
 
 on:
-  pull_request:
   push:
     branches:
       - "main"
-  schedule:
-    - cron: '0 0 * * *'
 
 jobs:
-  run_benchmarks_ubuntu:
+
+  run_benchmarks:
     strategy:
       matrix:
         os: ['ubuntu-latest', 'windows-latest']
@@ -26,7 +24,7 @@ jobs:
       - name: Run Benchmarks
         run: |-
           asv machine --machine ${{ matrix.os }} --yes
-          asv run
+          asv run HASHFILE:commits.txt
       - name: Move results(windows)
         if: ${{ matrix.os=='windows-latest' }}
         run: |
@@ -40,7 +38,7 @@ jobs:
           mv -f results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os}}/
           mv -f results/benchmarks.json ci-results/results/
       - name: Commit results
-        uses: EndBug/add-and-commit@v9 
+        uses: EndBug/add-and-commit@v9
         with:
           author_name: Github actions bot
           message: 'results for ${{ matrix.os }} added [skip ci]'
