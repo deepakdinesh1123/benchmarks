@@ -25,18 +25,6 @@ jobs:
         run: |-
           asv machine --machine ${{ matrix.os }} --yes
           asv run HASHFILE:commits.txt
-      - name: Move results(windows)
-        if: ${{ matrix.os=='windows-latest' }}
-        run: |
-          if(!( test-path ci-results/results/${{ matrix.os }} )) { mkdir ci-results/results/${{ matrix.os }} }
-          move-item -path results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os }}/ -force
-          move-item -path results/benchmarks.json ci-results/results/ -force
-      - name: Move results(ubuntu)
-        if: ${{ matrix.os=='ubuntu-latest' }}
-        run: |
-          mkdir -p ci-results/results/${{ matrix.os}}/
-          mv -f results/${{ matrix.os}}/*.* ci-results/results/${{ matrix.os}}/
-          mv -f results/benchmarks.json ci-results/results/
       - name: Commit results
         uses: EndBug/add-and-commit@v9
         with:
