@@ -139,7 +139,7 @@ cython_debug/
 
 # asv
 Django/
-html/
+html/*
 results/*
 !results/ubuntu-22.04
 !results/windows-2022
