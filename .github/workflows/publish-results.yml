@@ -21,3 +21,9 @@ jobs:
       - name: Publish results
         run: |
           asv publish --html-dir ci-results
+      - name: Commit results
+        uses: EndBug/add-and-commit@v9 
+        with:
+          author_name: Github actions bot
+          message: 'benchmark results published [skip ci]'
+          pull: '--rebase --autostash'
