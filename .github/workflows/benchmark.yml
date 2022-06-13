@@ -33,3 +33,4 @@ jobs:
           author_name: Github actions bot
           message: 'results for ${{ matrix.os }} added [skip ci]'
           pull: '--rebase --autostash'
+          push: origin/workflows
