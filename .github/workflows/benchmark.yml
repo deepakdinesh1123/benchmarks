@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - "main"
-      - "workflows"
   schedule:
     - cron: '0 0 * * *'
 
@@ -27,11 +26,10 @@ jobs:
       - name: Run Benchmarks
         run: |-
           asv machine --machine ${{ matrix.os }} --yes
-          asv run
+          asv run "HEAD -n 10"
       - name: Commit results
         uses: EndBug/add-and-commit@v9 
         with:
           author_name: Github actions bot
           message: 'results for ${{ matrix.os }} added [skip ci]'
           pull: '--rebase --autostash'
-          push: origin/workflows

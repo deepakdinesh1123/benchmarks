@@ -32,18 +32,7 @@ INSTALLED_APPS = [
     "benchmarks.url_benchmarks.url_reverse",
     "benchmarks.query_benchmarks.query_exclude",
     "benchmarks.query_benchmarks.query_exists",
-    "benchmarks.query_benchmarks.query_all",
-    "benchmarks.query_benchmarks.query_count",
-    "benchmarks.query_benchmarks.query_delete",
-    "benchmarks.query_benchmarks.query_get",
-    "benchmarks.query_benchmarks.query_get_or_create",
-    "benchmarks.query_benchmarks.query_values_list",
-    "benchmarks.query_benchmarks.query_values",
-    "benchmarks.query_benchmarks.query_values_10000",
-    "benchmarks.query_benchmarks.query_update",
-    "benchmarks.query_benchmarks.query_raw_deferred",
-    "benchmarks.query_benchmarks.query_raw",
-    "benchmarks.query_benchmarks.query_select_related",
+    "benchmarks.query_benchmarks.query_in_bulk",
 ]
 
 SECRET_KEY = "NOT REALLY SECRET"
