@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - "main"
+      - "workflows"
   schedule:
     - cron: '0 0 * * *'
 
