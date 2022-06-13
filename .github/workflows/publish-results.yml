@@ -27,3 +27,4 @@ jobs:
           author_name: Github actions bot
           message: 'benchmark results published [skip ci]'
           pull: '--rebase --autostash'
+          push: origin/workflows
