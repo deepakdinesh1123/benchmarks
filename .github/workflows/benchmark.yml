@@ -13,7 +13,7 @@ jobs:
   run_benchmarks_ubuntu:
     strategy:
       matrix:
-        os: ['ubuntu-22.04', 'windows-2022']
+        os: ['ubuntu-22.04']
     runs-on: ${{ matrix.os }}
     steps:
       - name: checkout
@@ -32,6 +32,6 @@ jobs:
         uses: EndBug/add-and-commit@v9 
         with:
           author_name: Github actions bot
-          message: 'results for ${{ matrix.os }} added [skip ci]'
+          message: 'results for ${{ matrix.os }}  added [skip ci]'
           pull: '--rebase --autostash'
           push: origin/workflows
