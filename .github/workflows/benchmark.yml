@@ -9,7 +9,7 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
-  run_benchmarks_ubuntu:
+  run_benchmarks:
     strategy:
       matrix:
         os: ['ubuntu-22.04', 'windows-2022', 'macos-12']
