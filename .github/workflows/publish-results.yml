@@ -23,8 +23,8 @@ jobs:
         run: pip install -r requirements.txt
       - name: Git config
         run: |
-          git config --global user.name "automated bot"
-          git config --global user.email "d.deepakdinesh13@gmail.com"
+          git config --global user.name "gh-pages bot"
+          git config --global user.email "gh-pages-bot@django.com"
       - name: Publish results
         run: |
           asv gh-pages --rewrite
