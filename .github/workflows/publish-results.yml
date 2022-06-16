@@ -21,6 +21,10 @@ jobs:
           python-version: '3.10'
       - name: Install Requirements
         run: pip install -r requirements.txt
+      - name: Git config
+        run: |
+          git config user.name "automated bot"
+          git config user.email "d.deepakdinesh13@gmail.com"
       - name: Publish results
         run: |
           asv gh-pages
