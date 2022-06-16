@@ -25,12 +25,9 @@ jobs:
         run: |
           git config --global user.name "automated bot"
           git config --global user.email "d.deepakdinesh13@gmail.com"
-          git checkout gh-pages 
-          git pull origin 
-          git checkout main
       - name: Publish results
         run: |
-          asv gh-pages
+          asv gh-pages --rewrite
       - name: Commit results
         uses: EndBug/add-and-commit@v9 
         with:
