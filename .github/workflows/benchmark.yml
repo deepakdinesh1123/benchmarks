@@ -26,10 +26,11 @@ jobs:
       - name: Run Benchmarks
         run: |-
           asv machine --machine ${{ matrix.os }} --yes
-          asv run "HEAD -n 10" --skip-existing
+          asv run "HEAD -n 5" --skip-existing
       - name: Commit results
         uses: EndBug/add-and-commit@v9 
         with:
           author_name: Github actions bot
           message: 'results for ${{ matrix.os }} added [skip ci]'
           pull: '--rebase --autostash'
+          add: "-f results/*"

@@ -5,9 +5,6 @@ on:
     workflows: ["Benchmark"]
     types:
       - completed
-  push:
-    branches:
-      - "main"
 
 jobs:
   publish_results:
