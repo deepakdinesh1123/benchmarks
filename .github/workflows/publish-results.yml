@@ -21,10 +21,4 @@ jobs:
           git fetch origin gh-pages:gh-pages
       - name: Publish results
         run: |
-          asv gh-pages 
-      - name: Commit results
-        uses: EndBug/add-and-commit@v9 
-        with:
-          author_name: Github actions bot
-          message: 'benchmark results published [skip ci]'
-          pull: '--rebase --autostash'
+          asv gh-pages
