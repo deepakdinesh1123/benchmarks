@@ -30,4 +30,4 @@ jobs:
           add: '-f results/*'
       - name: Call Publish results workflow
         if: github.event.pull_request != 'true'
-        uses: .github/workflows/publish-results.yml@main
+        uses: deepakdinesh1123/benchmarks/.github/workflows/publish-results.yml@main
