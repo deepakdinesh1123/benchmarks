@@ -28,6 +28,7 @@ jobs:
           message: 'results for ubuntu-22.04 added [skip ci]'
           pull: '--rebase --autostash'
           add: '-f results/*'
-      - name: Call Publish results workflow
-        if: github.event.pull_request != 'true'
-        uses: deepakdinesh1123/benchmarks/.github/workflows/publish-results.yml@main
+
+  call_publish_results_workflow:
+      if: github.event.pull_request != 'true'
+      uses: deepakdinesh1123/benchmarks/.github/workflows/publish-results.yml@main
