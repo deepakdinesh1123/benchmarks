@@ -21,6 +21,7 @@ jobs:
           asv machine --machine ubuntu-22.04 --yes
           asv run --skip-existing
       - name: Commit results
+        if: github.event.pull_request != 'true'
         uses: EndBug/add-and-commit@v9
         with:
           author_name: Github actions bot
