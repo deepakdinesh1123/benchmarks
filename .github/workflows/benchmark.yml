@@ -21,7 +21,7 @@ jobs:
           asv machine --machine ubuntu-22.04 --yes
           asv run --skip-existing
       - name: Commit results
-        if: github.event.pull_request != 'true'
+        if: github.event_name != 'pull_request'
         uses: EndBug/add-and-commit@v9
         with:
           author_name: Github actions bot
@@ -31,5 +31,5 @@ jobs:
 
   call_publish_results_workflow:
       needs: run_benchmarks
-      if: github.event.pull_request != 'true'
+      if: github.event_name != 'pull_request'
       uses: deepakdinesh1123/benchmarks/.github/workflows/publish-results.yml@main
