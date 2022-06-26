@@ -16,15 +16,15 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Requirements
         run: pip install -r requirements.txt
-      - name: Run Benchmarks
-        run: |-
-          asv machine --machine ubuntu-22.04 --yes
-          asv run --skip-existing
       - name: cache Django
         uses: actions/cache@v3
         with:
           path: Django/*
           key: Django
+      - name: Run Benchmarks
+        run: |-
+          asv machine --machine ubuntu-22.04 --yes
+          asv run --skip-existing
       - name: Commit results
         if: github.event.pull_request != 'true'
         uses: EndBug/add-and-commit@v9
