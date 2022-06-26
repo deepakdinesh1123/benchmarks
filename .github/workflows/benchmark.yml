@@ -24,7 +24,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: Django/*
-          key: ${{ runner.os }}-Django
+          key: Django
       - name: Commit results
         if: github.event.pull_request != 'true'
         uses: EndBug/add-and-commit@v9
