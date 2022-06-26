@@ -20,6 +20,10 @@ jobs:
         run: |-
           asv machine --machine ubuntu-22.04 --yes
           asv run --skip-existing
+      - name: cache Django
+        uses: actions/cache@v3
+        with:
+          path: Django/*
       - name: Commit results
         if: github.event.pull_request != 'true'
         uses: EndBug/add-and-commit@v9
