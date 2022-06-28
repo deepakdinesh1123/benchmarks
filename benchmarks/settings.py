@@ -13,7 +13,7 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "benchmarks",
-    "benchmarks.query_benchmarks.query_multifield",
+    "benchmarks.query_benchmarks.query_all_multifield",
     "benchmarks.template_benchmarks.template_render",
     "benchmarks.template_benchmarks.template_compilation",
     "benchmarks.query_benchmarks.query_annotate",
@@ -32,7 +32,12 @@ INSTALLED_APPS = [
     "benchmarks.url_benchmarks.url_reverse",
     "benchmarks.query_benchmarks.query_exclude",
     "benchmarks.query_benchmarks.query_exists",
+    "benchmarks.query_benchmarks.query_filter",
     "benchmarks.query_benchmarks.query_in_bulk",
+    "benchmarks.query_benchmarks.query_latest",
+    "benchmarks.query_benchmarks.query_order_by",
+    "benchmarks.query_benchmarks.query_none",
+    "benchmarks.query_benchmarks.query_prefetch_related",
 ]
 
 SECRET_KEY = "NOT REALLY SECRET"
