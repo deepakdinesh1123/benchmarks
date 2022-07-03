@@ -21,10 +21,13 @@ jobs:
           - name: "no_interleave"
             asv-args: "--no-interleave-processes"
           - name: "default"
-            asv-args: "--interleave-processes  -a processes=2"
+            asv-args: "--interleave-processes -a processes=2"
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
+      - name: Pull Changes
+        if: github.event_name != 'pull_request'
+        run: git pull origin
       - name: Install Requirements
         run: pip install -r requirements.txt
       - name: Cache Django
@@ -41,12 +44,12 @@ jobs:
           set -e
       - name: Commit results
         if: always() && github.event_name != 'pull_request'
-        uses: EndBug/add-and-commit@v9
-        with:
-          author_name: Github actions bot
-          message: 'Results for ubuntu-22.04 added [skip ci].'
-          pull: '--rebase --autostash'
-          add: '-f results/*'
+        run: |
+          git config user.name "Github Bot"
+          git config user.email "results_bot@github.com"
+          git add -f results/*
+          git commit -m "Results for ubuntu-22.04 added [skip ci]"
+          git push origin
 
   call_publish_results_workflow:
       needs: run_benchmarks
