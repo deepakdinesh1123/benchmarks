@@ -21,7 +21,7 @@ jobs:
           - name: "no_interleave"
             asv-args: "--no-interleave-processes"
           - name: "default"
-            asv-args: "--interleave-processes -a processes=2"
+            asv-args: "--interleave-processes  -a processes=2"
     steps:
       - name: checkout
         uses: actions/checkout@v3
