@@ -41,12 +41,13 @@ jobs:
           set -e
       - name: Commit results
         if: always() && github.event_name != 'pull_request'
-        uses: EndBug/add-and-commit@v9
-        with:
-          author_name: Github actions bot
-          message: 'Results for ubuntu-22.04 added [skip ci].'
-          pull: '--rebase --autostash'
-          add: '-f results/*'
+        run: |
+          git config user.name "Github Bot"
+          git config user.email "results_bot@github.com"
+          git pull origin
+          git add -f results/*
+          git commit -m "Results for ubuntu-22.04 added [skip ci]"
+          git push origin
 
   call_publish_results_workflow:
       needs: run_benchmarks
