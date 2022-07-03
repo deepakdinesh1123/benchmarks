@@ -37,7 +37,6 @@ jobs:
       - name: Run Benchmarks
         shell: bash -l {0}
         run: |-
-          set -x
           asv machine --machine ubuntu-22.04 --yes
           set +e
           asv continuous ${{ matrix.asv-args }} --split --show-stderr 'HEAD^' 'HEAD'
