@@ -11,30 +11,42 @@ on:
 jobs:
   run_benchmarks:
     runs-on: 'ubuntu-22.04'
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "processes_1"
+            asv-args: "-a processes=1"
+          - name: "no_interleave"
+            asv-args: "--no-interleave-processes"
+          - name: "default"
+            asv-args: "--interleave-processes -a processes=2"
     steps:
       - name: checkout
         uses: actions/checkout@v3
       - name: Install Requirements
         run: pip install -r requirements.txt
-      - name: cache Django
+      - name: Cache Django
         uses: actions/cache@v3
         with:
           path: Django/*
           key: Django
       - name: Run Benchmarks
+        shell: bash -l {0}
         run: |-
+          set -x
           asv machine --machine ubuntu-22.04 --yes
-          asv run --skip-existing
+          asv continuous ${{ matrix.asv-args }} --split --show-stderr 'HEAD^' 'HEAD'
       - name: Commit results
-        if: github.event.pull_request != 'true'
+        if: github.event_name != 'pull_request'
         uses: EndBug/add-and-commit@v9
         with:
           author_name: Github actions bot
-          message: 'results for ubuntu-22.04 added  [skip ci]'
+          message: 'Results for ubuntu-22.04 added [skip ci].'
           pull: '--rebase --autostash'
           add: '-f results/*'
 
   call_publish_results_workflow:
       needs: run_benchmarks
-      if: github.event.pull_request != 'true'
+      if: github.event_name != 'pull_request'
       uses: deepakdinesh1123/benchmarks/.github/workflows/publish-results.yml@main
