@@ -35,5 +35,5 @@ jobs:
           git config user.name "Github Bot"
           git config user.email "results_bot@github.com"
           git add -f results/*
-          git commit -m "Results for ubuntu-22.04 added [skip ci]"
+          git commit -m "Results  for ubuntu-22.04 added [skip ci]"
           git push origin
