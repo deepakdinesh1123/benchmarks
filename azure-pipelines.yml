@@ -3,19 +3,10 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger: none
-pr: none
+trigger:
+  - main
 
 pool: default
-
-resources:
-  pipelines:
-    - pipeline: main
-      source: mainrepo
-      project: Benchmarks
-      trigger: 
-        branches:
-          - main
 
 steps:
 - script: echo "I was triggered"
