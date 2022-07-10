@@ -8,5 +8,14 @@ trigger:
 
 pool: default
 
+resources:
+  pipelines:
+    - pipeline: benchmarks
+      source: mainrepo
+      project: Benchmarks
+      trigger: 
+        branches:
+          - main
+
 steps:
 - script: echo "I was triggered"
