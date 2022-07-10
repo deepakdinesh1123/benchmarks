@@ -13,9 +13,9 @@ resources:
     - pipeline: benchmarks
       source: mainrepo
       project: Benchmarks
-      trigger: 
+      trigger:
         branches:
           - main
 
 steps:
-- script: echo "I was triggered"
+- script: conda create --name exp python=3.10 --quiet
