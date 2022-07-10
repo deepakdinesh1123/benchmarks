@@ -18,4 +18,16 @@ resources:
           - main
 
 steps:
-- script: conda create --name exp python=3.10 --quiet
+- checkout: self
+  persistCredentials: true
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.10'
+- script: pip install -r requirements.txt
+- script: asv continuous --interleave-processes -a processes=2 --split --show-stderr 'HEAD^' 'HEAD'
+- script: |
+    git config user.name "Github Bot"
+    git config user.email "results_bot@github.com"
+    git add -f results/*
+    git commit -m "Results for ubuntu-22.04 added [skip ci]"
+    git push origin
