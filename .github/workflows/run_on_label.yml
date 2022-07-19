@@ -4,8 +4,10 @@ on:
   pull_request:
     types: [ labeled ]
   issue_comment:
+    types: [created]
+  issues:
     types:
-      - "created"
+      - "labeled"
 
 jobs:
   Run_benchmarks:
