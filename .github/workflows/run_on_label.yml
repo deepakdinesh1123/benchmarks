@@ -2,7 +2,8 @@ name: Run on label or comment
 
 on:
   pull_request:
-    types: [ labeled ]
+    types:
+      - labeled
   issue_comment:
     types: [created]
   issues:
