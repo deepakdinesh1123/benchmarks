@@ -14,6 +14,6 @@ jobs:
           state: success
           context: 'Benchmarks'
           repository: deepakdinesh1123/benchmarks
-          description: 'BENCHMARKS NOT CHANGED SIGNIFICANTLY'
+          description: 'BENCHMARKS NOT CHANGED SIGNIFICANTLY '
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
