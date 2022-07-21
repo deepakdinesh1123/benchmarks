@@ -2,9 +2,10 @@ name: set status
 
 on:
   pull_request:
+    types: [reopened]
 
 env:
-  BENCHMARK-RESULT: 'BNEHCMARKS NOT CHANGED SIGNIFICANTLY'
+  BENCHMARK-RESULT: "BNEHCMARKS NOT CHANGED SIGNIFICANTLY"
 
 jobs:
   Set_Status:
@@ -17,4 +18,4 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           https://api.github.com/repos/deepakdinesh1123/benchmarks/pulls/${{ github.event.number }} \
-          -d '{"state":"success","description":'$BENCHMARK-RESULT',"context":"Benchmarks"}'
+          -d '{"state":"success","description":"$BENCHMARK-RESULT","context":"Benchmarks"}'
