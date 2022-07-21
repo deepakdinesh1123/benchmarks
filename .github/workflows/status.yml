@@ -1,23 +1,20 @@
 name: set status
 
 on:
-  pull_request:
+  push:
 
 jobs:
   Set_Status:
     runs-on: ubuntu-22.04
     steps:
+      - uses: actions/checkout@v3
+      - name: Copy
+        run: cat out.txt >> $GITHUB_ENV
       - name: Set result
         id: set_result
-        run: echo "::set-output name=result::BENCHMARKS NOT CHANGED SIGNIFICANTLY"
-      - name: Set status
-        id: set_status
-        uses: "teamniteo/pull_request_status_action@v1.0.0"
-        with:
-          pr_number: ${{ github.event.number }}
-          state: success
-          context: 'Benchmarks'
-          repository: deepakdinesh1123/benchmarks
-          description: ${{ steps.set_result.outputs.result }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |-
+          if grep "PERFORMANCE DECREASED" $GITHUB_STEP_SUMMARY
+          then
+            echo "BENCHMARKS HAVE CHANGED SIGNIFICANTLY" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "BENCHMARKS NOT CHANGED SIGNIFICANTLY" >> $GITHUB_STEP_SUMMARY
