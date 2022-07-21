@@ -3,6 +3,9 @@ name: set status
 on:
   pull_request:
 
+env:
+  BENCHMARK-RESULT: 'BENCHMARKS NOT CHANGED SIGNIFICANTLY'
+
 jobs:
   Set_Status:
     runs-on: ubuntu-22.04
@@ -14,6 +17,6 @@ jobs:
           state: success
           context: 'Benchmarks'
           repository: deepakdinesh1123/benchmarks
-          description: 'BENCHMARKS NOT CHANGED SIGNIFICANTLY'
+          description: $BENCHMARK-RESULT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
