@@ -2,34 +2,22 @@ name: set status
 
 on:
   pull_request:
-    types: [reopened]
-
-env:
-  PR_NUM: ${{ github.event.number }}
-  BENCHMARK-RESULT: "BENCHMARKS NOT CHANGED SIGNIFICANTLY"
 
 jobs:
   Set_Status:
     runs-on: ubuntu-22.04
     steps:
-      - name: Intsall Requirements
-        run: pip install requests
-      - name: Set Status
-        run: |
-          python -c '
-          import requests, os, json, sys
-          headers = {
-            "Accept": "application/vnd.github.v3+json",
-            "Authorization": f"token {sys.argv[1]}",
-          }
-          payload = {
-            "state": "success",
-            "context": "Benchmarks",
-            "description": f"{os.environ['BENCHMARK-RESULT']}",
-          }
-          url = f"https://api.github.com/repos/benchmarks/pulls/{os.environ.get('PR_NUM')}"
-          response = requests.get(url, headers)
-          status_url = response.json()["statuses_url"]
-          response = requests.post(status_url, headers, data=json.dumps(payload))
-          response.raise_for_status()
-          ' ${{ secrets.GTIHUB_TOKEN }}
+      - name: Set result
+        id: set_result
+        run: echo ::set-output name=result::BENCHMARKS
+      - name: Set status
+        id: set_status
+        uses: "teamniteo/pull_request_status_action@v1.0.0"
+        with:
+          pr_number: ${{ github.event.number }}
+          state: success
+          context: 'Benchmarks'
+          repository: deepakdinesh1123/benchmarks
+          description: ${{ steps.set_result.outputs.result }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
