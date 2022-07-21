@@ -15,9 +15,9 @@ jobs:
       - name: Set Status
         env:
           PR_NUM: ${{ github.event.number }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BENCHMARK-RESULT: "BENCHMARKS NOT CHANGED SIGNIFICANTLY"
         run: |
+          GITHUB_TOKEN = ${{ secrets.GITHUB_TOKEN }}
           python -c '
           import requests, os, json
           headers = {
