@@ -7,8 +7,7 @@ on:
 env:
   PR_NUM: ${{ github.event.number }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  BENCHMARK-RESULT: 'BENCHMARKS NOT CHANGED SIGNIFICANTLY'
-
+  BENCHMARK-RESULT: "BENCHMARKS NOT CHANGED SIGNIFICANTLY"
 
 jobs:
   Set_Status:
@@ -19,19 +18,19 @@ jobs:
       - name: Set Status
         run: |
           python -c '
-            import requests, os, json
-            headers = {
-              "Accept": "application/vnd.github.v3+json",
-              "Authorization": f"token {os.environ['GITHUB_TOKEN']}",
-            }
-            payload = {
-              "state": "success",
-              "context": "Benchmarks",
-              "description": f"{os.environ['BENCHMARK-RESULT']}",
-            }
-            url = f"https://api.github.com/repos/benchmarks/pulls/{os.environ.get('PR_NUM')}"
-            response = requests.get(url, headers)
-            status_url = response.json()["statuses_url"]
-            response = requests.post(status_url, headers, data=json.dumps(payload))
-            response.raise_for_status()
+          import requests, os, json
+          headers = {
+            "Accept": "application/vnd.github.v3+json",
+            "Authorization": f"token {os.environ['GITHUB_TOKEN']}",
+          }
+          payload = {
+            "state": "success",
+            "context": "Benchmarks",
+            "description": f"{os.environ['BENCHMARK-RESULT']}",
+          }
+          url = f"https://api.github.com/repos/benchmarks/pulls/{os.environ.get('PR_NUM')}"
+          response = requests.get(url, headers)
+          status_url = response.json()["statuses_url"]
+          response = requests.post(status_url, headers, data=json.dumps(payload))
+          response.raise_for_status()
           '
