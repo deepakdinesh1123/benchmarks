@@ -3,8 +3,6 @@ name: set status
 on:
   pull_request:
 
-env:
-  BENCHMARK-RESULT: 'BENCHMARKS NOT CHANGED SIGNIFICANTLY'
 
 jobs:
   Set_Status:
@@ -20,3 +18,4 @@ jobs:
           description: $BENCHMARK-RESULT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BENCHMARK-RESULT: 'BENCHMARKS NOT CHANGED SIGNIFICANTLY'
