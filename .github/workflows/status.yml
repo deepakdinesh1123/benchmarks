@@ -11,10 +11,4 @@ jobs:
       - name: Set result
         shell: bash -l {0}
         id: set_result
-        run: |-
-          if grep -q "PERFORMANCE DECREASED" out.txt;
-          then
-            echo "BENCHMARKS HAVE CHANGED SIGNIFICANTLY"
-          else
-            echo "BENCHMARKS NOT CHANGED SIGNIFICANTLY"
-          fi
+        run: cat out.txt >> $GITHUB_STEP_SUMMARY
