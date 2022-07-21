@@ -4,13 +4,14 @@ on:
   pull_request:
     types: [reopened]
 
-env:
-  PR_NUM: ${{ github.event.number }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  BENCHMARK-RESULT: "BENCHMARKS NOT CHANGED SIGNIFICANTLY"
+
 
 jobs:
   Set_Status:
+    env:
+      PR_NUM: ${{ github.event.number }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      BENCHMARK-RESULT: "BENCHMARKS NOT CHANGED SIGNIFICANTLY"
     runs-on: ubuntu-22.04
     steps:
       - name: Intsall Requirements
