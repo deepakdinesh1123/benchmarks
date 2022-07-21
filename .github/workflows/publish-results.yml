@@ -1,7 +1,7 @@
 name: Publish results
 
 on: workflow_call
-    
+
 jobs:
   publish_results:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Git config
         run: |
-          git config --global user.name "gh-pages bot"
+          git config --global user.name "gh-pages bot "
           git config --global user.email "gh-pages-bot@django.com"
           git fetch origin gh-pages:gh-pages
       - name: Publish results
