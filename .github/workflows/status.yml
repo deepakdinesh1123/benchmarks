@@ -2,17 +2,20 @@ name: set status
 
 on:
   pull_request:
+    types: [reopened]
+
+env:
+  BENCHMARK-RESULT: "BNEHCMARKS NOT CHANGED SIGNIFICANTLY"
 
 jobs:
   Set_Status:
     runs-on: ubuntu-22.04
     steps:
       - name: Set status
-        uses: "teamniteo/pull_request_status_action@v1.0.0"
-        with:
-          pr_number: ${{ github.event.number }}
-          state: success
-          repository: deepakdinesh1123/benchmarks
-          description: 'BENCHMARKS NOT CHANGED SIGNIFICANTLY '
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |-
+          curl \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          https://api.github.com/repos/deepakdinesh1123/benchmarks/pulls/${{ github.event.number }} \
+          -d '{"state":"success","description":"$BENCHMARK-RESULT","context":"Benchmarks"}'
