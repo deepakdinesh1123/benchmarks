@@ -4,7 +4,9 @@ on:
   pull_request:
     types: [reopened]
 
-
+env:
+  PR_NUM: ${{ github.event.number }}
+  BENCHMARK-RESULT: "BENCHMARKS NOT CHANGED SIGNIFICANTLY"
 
 jobs:
   Set_Status:
@@ -13,16 +15,12 @@ jobs:
       - name: Intsall Requirements
         run: pip install requests
       - name: Set Status
-        env:
-          PR_NUM: ${{ github.event.number }}
-          BENCHMARK-RESULT: "BENCHMARKS NOT CHANGED SIGNIFICANTLY"
         run: |
-          echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
           python -c '
-          import requests, os, json
+          import requests, os, json, sys
           headers = {
             "Accept": "application/vnd.github.v3+json",
-            "Authorization": f"token {os.environ['GITHUB_TOKEN']}",
+            "Authorization": f"token {sys.argv[1]}",
           }
           payload = {
             "state": "success",
@@ -34,4 +32,4 @@ jobs:
           status_url = response.json()["statuses_url"]
           response = requests.post(status_url, headers, data=json.dumps(payload))
           response.raise_for_status()
-          '
+          ' ${{ secrets.GTIHUB_TOKEN }}
