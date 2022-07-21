@@ -1,0 +1,20 @@
+name: set status
+
+on:
+  pull_request:
+
+env:
+  BENCHMARK-RESULT: 'BNEHCMARKS NOT CHANGED SIGNIFICANTLY'
+
+jobs:
+  Set_Status:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Set status
+        run: |-
+          curl \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          https://api.github.com/repos/deepakdinesh1123/benchmarks/pulls/${{ github.event.number }} \
+          -d '{"state":"success","description":'$BENCHMARK-RESULT',"context":"Benchmarks"}'
