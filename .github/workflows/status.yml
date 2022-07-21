@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Set result
         id: set_result
-        run: echo ::set-output name=result::BENCHMARKS
+        run: echo "::set-output name=result::BENCHMARKS NOT CHANGED SIGNIFICANTLY"
       - name: Set status
         id: set_status
         uses: "teamniteo/pull_request_status_action@v1.0.0"
