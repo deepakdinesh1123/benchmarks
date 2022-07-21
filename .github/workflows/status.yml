@@ -17,7 +17,7 @@ jobs:
           PR_NUM: ${{ github.event.number }}
           BENCHMARK-RESULT: "BENCHMARKS NOT CHANGED SIGNIFICANTLY"
         run: |
-          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
           python -c '
           import requests, os, json
           headers = {
