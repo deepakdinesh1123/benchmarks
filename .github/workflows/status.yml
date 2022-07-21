@@ -11,10 +11,12 @@ jobs:
       - name: Copy
         run: cat out.txt >> $GITHUB_STEP_SUMMARY
       - name: Set result
+        shell: bash -l {0}
         id: set_result
         run: |-
-          if grep "PERFORMANCE DECREASED" $GITHUB_STEP_SUMMARY
+          if (( grep "PERFORMANCE DECREASED" $GITHUB_STEP_SUMMARY ));
           then
             echo "BENCHMARKS HAVE CHANGED SIGNIFICANTLY" >> $GITHUB_STEP_SUMMARY
           else
             echo "BENCHMARKS NOT CHANGED SIGNIFICANTLY" >> $GITHUB_STEP_SUMMARY
+          fi
