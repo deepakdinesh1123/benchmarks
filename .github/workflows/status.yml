@@ -16,7 +16,7 @@ jobs:
         run: |-
           if (( grep "PERFORMANCE DECREASED" $GITHUB_STEP_SUMMARY ));
           then
-            echo "BENCHMARKS HAVE CHANGED SIGNIFICANTLY" >> $GITHUB_STEP_SUMMARY
+            echo "BENCHMARKS HAVE CHANGED SIGNIFICANTLY"
           else
-            echo "BENCHMARKS NOT CHANGED SIGNIFICANTLY" >> $GITHUB_STEP_SUMMARY
+            echo "BENCHMARKS NOT CHANGED SIGNIFICANTLY"
           fi
