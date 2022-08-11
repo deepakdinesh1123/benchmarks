@@ -10,7 +10,7 @@ on:
 
 jobs:
   run_benchmarks:
-    runs-on: 'ubuntu-22.04'
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -27,7 +27,7 @@ jobs:
       - name: Run Benchmarks
         shell: bash -l {0}
         run: |-
-          asv machine --machine ubuntu-22.04 --yes
+          asv machine --machine ubuntu-latest
           echo '```' >> $GITHUB_STEP_SUMMARY
           asv continuous --interleave-processes -a processes=2 --split --show-stderr 'HEAD^' 'HEAD' |\
           sed -n -E '/(before.*after.*ratio)|(BENCHMARKS)/,$p' >> out.txt
@@ -39,7 +39,7 @@ jobs:
           git config user.name "Github Bot"
           git config user.email "results_bot@github.com"
           git add -f results/*
-          git commit -m "Results for ubuntu-22.04 added [skip ci]"
+          git commit -m "Results for ubuntu-latest added [skip ci]"
           git push origin
 
   call_publish_results_workflow:

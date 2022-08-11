@@ -1,0 +1,9 @@
+{
+    "ubuntu-latest": {
+        "arch": "x86_64",
+        "machine": "ubuntu-latest",
+        "num_cpu": "2",
+        "os": "ubuntu 22.04 LTS"
+    },
+    "version": 1
+}
