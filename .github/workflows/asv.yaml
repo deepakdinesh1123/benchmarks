@@ -1,0 +1,26 @@
+name: ASV
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "main"
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  run_benchmarks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Pull Changes
+        if: github.event_name != 'pull_request'
+        run: git pull origin
+      - name: Install Requirements
+        run: pip install -r requirements.txt
+      - name: Check asv defaults
+        run: |
+          asv machine --yes
+          cat ~/.asv-machine.json
+          cat ~/.asv-machine.json | $GITHUB_STEP_SUMMARY

@@ -28,7 +28,6 @@ jobs:
         shell: bash -l {0}
         run: |-
           asv machine --machine ubuntu-latest
-          asv machine --machine ubuntu-latest
           echo '```' >> $GITHUB_STEP_SUMMARY
           asv continuous --interleave-processes -a processes=2 --split --show-stderr 'HEAD^' 'HEAD' |\
           sed -n -E '/(before.*after.*ratio)|(BENCHMARKS)/,$p' >> out.txt
