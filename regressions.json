@@ -1,1 +1,1 @@
-{"regressions": []}
+{"regressions": [["template_benchmarks.template_compilation.benchmark.TemplateCompile.time_template_compile", "graphs/branch-main/cpu-Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz/machine-ubuntu-latest/python-3.9/template_benchmarks.template_compilation.benchmark.TemplateCompile.time_template_compile.json", {"machine": "ubuntu-latest", "python": "3.9"}, null, 0.00025881732142893485, 0.00024182531521679937, [[null, 81013, 0.00024182531521679937, 0.00025881732142893485]]]]}
